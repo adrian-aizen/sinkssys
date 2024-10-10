@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-4">
+        <h1 class="text-2xl font-bold mb-4">Employee List</h1>
+        <table class="table-auto w-full bg-white shadow-md rounded-lg">
+            <thead>
+                <tr class="bg-gray-200">
+                    <th class="px-4 py-2">Name</th>
+                    <th class="px-4 py-2">Job Title</th>
+                    <th class="px-4 py-2">Department</th>
+                    <th class="px-4 py-2">Email</th>
+                    <th class="px-4 py-2">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="border px-4 py-2">Ivan Petrov</td>
+                    <td class="border px-4 py-2">Software Engineer</td>
+                    <td class="border px-4 py-2">IT</td>
+                    <td class="border px-4 py-2">ivan.petrov@sinksrus.com</td>
+                    <td class="border px-4 py-2">
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded" onclick="openModal('ivan')">View</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="border px-4 py-2">Pedro Los Baños</td>
+                    <td class="border px-4 py-2">Marketing Manager</td>
+                    <td class="border px-4 py-2">Marketing</td>
+                    <td class="border px-4 py-2">pedro_los_banos@sinksrus.com</td>
+                    <td class="border px-4 py-2">
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded" onclick="openModal('pedro')">View</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="border px-4 py-2">Ana Gómez</td>
+                    <td class="border px-4 py-2">HR Specialist</td>
+                    <td class="border px-4 py-2">HR</td>
+                    <td class="border px-4 py-2">ana.gomez@sinksrus.com</td>
+                    <td class="border px-4 py-2">
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded" onclick="openModal('ana')">View</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="border px-4 py-2">John Wu</td>
+                    <td class="border px-4 py-2">Sales Associate</td>
+                    <td class="border px-4 py-2">Sales</td>
+                    <td class="border px-4 py-2">john.wu@sinksrus.com</td>
+                    <td class="border px-4 py-2">
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded" onclick="openModal('john')">View</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="border px-4 py-2">Emma Wilson</td>
+                    <td class="border px-4 py-2">CEO</td>
+                    <td class="border px-4 py-2">Admin</td>
+                    <td class="border px-4 py-2">emma@sinksrus.com</td>
+                    <td class="border px-4 py-2">
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded" onclick="openModal('emma')">View</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="employeeModal" class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center">
+        <div class="bg-white rounded-lg p-8 w-1/2">
+            <h2 id="employeeName" class="text-xl font-bold mb-4">Employee Info</h2>
+            <p id="employeeJobTitle"></p>
+            <p id="employeeDepartment"></p>
+            <p id="employeeEmail"></p>
+            <p id="employeeContact"></p>
+            <p id="employeeAddress"></p>
+            <p id="employeeSex"></p>
+            <p id="employeeMaritalStatus"></p>
+            <button class="bg-red-500 text-white px-4 py-2 rounded mt-4" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        const employees = {
+            ivan: {
+                name: 'Ivan Petrov',
+                jobTitle: 'Software Engineer',
+                department: 'IT',
+                email: 'ivan.petrov@sinksrus.com',
+                contact: '555-6789',
+                address: '12 Red Square, Moscow',
+                sex: 'Male',
+                maritalStatus: 'Single'
+            },
+            pedro: {
+                name: 'Pedro Los Baños',
+                jobTitle: 'Marketing Manager',
+                department: 'Marketing',
+                email: 'pedro_los_banos@sinksrus.com',
+                contact: '555-6789',
+                address: '123 Mabini St',
+                sex: 'Male',
+                maritalStatus: 'Married'
+            },
+            ana: {
+                name: 'Ana Gómez',
+                jobTitle: 'HR Specialist',
+                department: 'HR',
+                email: 'ana.gomez@sinksrus.com',
+                contact: '555-1526',
+                address: 'N/A',
+                sex: 'Female',
+                maritalStatus: 'Divorced'
+            },
+            john: {
+                name: 'John Wu',
+                jobTitle: 'Sales Associate',
+                department: 'Sales',
+                email: 'john.wu@sinksrus.com',
+                contact: '555-6925',
+                address: '456 Rizal St',
+                sex: 'Male',
+                maritalStatus: 'Single'
+            },
+            emma: {
+                name: 'Emma Wilson',
+                jobTitle: 'CEO',
+                department: 'Admin',
+                email: 'emma@sinksrus.com',
+                contact: '555-1111',
+                address: 'N/A',
+                sex: 'Female',
+                maritalStatus: 'Married'
+            }
+        };
+    
+        function openModal(employeeId) {
+            const employee = employees[employeeId];
+            document.getElementById('employeeName').innerText = employee.name;
+            document.getElementById('employeeJobTitle').innerText = `Job Title: ${employee.jobTitle}`;
+            document.getElementById('employeeDepartment').innerText = `Department: ${employee.department}`;
+            document.getElementById('employeeEmail').innerText = `Email: ${employee.email}`;
+            document.getElementById('employeeContact').innerText = `Contact: ${employee.contact}`;
+            document.getElementById('employeeAddress').innerText = `Address: ${employee.address}`;
+            document.getElementById('employeeSex').innerText = `Sex: ${employee.sex}`;
+            document.getElementById('employeeMaritalStatus').innerText = `Marital Status: ${employee.maritalStatus}`;
+            
+            // Show the modal
+            document.getElementById('employeeModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            // Hide the modal
+            document.getElementById('employeeModal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
